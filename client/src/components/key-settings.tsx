@@ -1,77 +1,52 @@
-import { useState } from 'react'
+import { FormEvent, FormEventHandler, useState } from 'react'
 import Dropdown, { DropdownOption } from './dropdown'
+import ChordsForKey, { Note, Accidental, Scale } from './chords-for-key'
 
-// TODO: convert to enums
 const keyOptions = [
-  { value: 'A', label: 'A' },
-  { value: 'B', label: 'B' },
-  { value: 'C', label: 'C' },
-  { value: 'D', label: 'D' },
-  { value: 'E', label: 'E' },
-  { value: 'F', label: 'F' },
-  { value: 'G', label: 'G' }
+  { value: Note.A, key: Note.A },
+  { value: Note.B, key: Note.B },
+  { value: Note.C, key: Note.C },
+  { value: Note.D, key: Note.D },
+  { value: Note.E, key: Note.E },
+  { value: Note.F, key: Note.F },
+  { value: Note.G, key: Note.G }
 ]
 
 const accidentalOptions = [
-  { value: 'natural', label: '♮' },
-  { value: 'flat', label: '♭' },
-  { value: 'sharp', label: '♯' }
+  { value: Accidental.natural, key: '♮' },
+  { value: Accidental.flat, key: '♭' },
+  { value: Accidental.sharp, key: '♯' }
 ]
 
 const scaleOptions = [
-  { value: 'major', label: 'maj' },
-  { value: 'minor', label: 'min' }
+  { value: Scale.major, key: 'maj' },
+  { value: Scale.minor, key: 'min' }
 ]
 const standardProgressions = ['I - V - VI - IV']
 
-interface KeyFormData {
-  key: string
-  accidental: string
-  scale: string
-  progression: string
-}
-
 interface DropdownProps {
   options: DropdownOption[]
-  onChange: (selectedItems: DropdownOption[]) => void
 }
 
-const KeySettings = () => {
-  const [selectedItems, setSelectedItems] = useState<
-    { value: string; label: string }[]
-  >([])
+interface KeySettingsProps {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+}
 
-  //   selection: { value: string; label: string }
-  const handleDropdownChange = (
-    selected: { value: string; label: string }[]
-  ) => {
-    setSelectedItems(selected)
-    console.log(selected)
-  }
+const KeySettings = ({ handleSubmit }: KeySettingsProps) => {
+  const [selectedItem, setselectedItem] = useState<DropdownOption>()
 
-  const onSubmit = (option: any) => {
-    console.log('submitted')
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(keyOptions)
-  }
   return (
-    <form onSubmit={handleSubmit}>
-      <div id='key-settings'>
+    <div id='key-settings'>
+      <form onSubmit={handleSubmit}>
         <label>Key:</label>
         <div className='key-input'>
-          <Dropdown options={keyOptions} onChange={handleDropdownChange} />
-          <Dropdown
-            options={accidentalOptions}
-            onChange={handleDropdownChange}
-          />
-          <Dropdown options={scaleOptions} onChange={handleDropdownChange} />
+          <Dropdown label={'baseKey'} options={keyOptions} />
+          <Dropdown label={'accidental'} options={accidentalOptions} />
+          <Dropdown label={'scale'} options={scaleOptions} />
         </div>
         <button type='submit'>Update</button>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
 

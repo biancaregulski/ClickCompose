@@ -17,7 +17,7 @@ const Workspace = () => {
         <Chord />
         <Chord />
       </div>
-      <button onClick={apiCall}>Make API Call</button>
+      {/* <button onClick={apiCall}>Make API Call</button> */}
     </div>
   )
 }

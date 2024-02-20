@@ -41,11 +41,19 @@
   background-color: var(--secondary-background);
   padding: 1em;
   min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chord-group {
+  display: flex;
+  flex-direction: row;
 }
 
 #key-settings {
   display: flex;
   flex-direction: column;
+  gap: 0.5em;
   text-align: left;
   font-size: 16px;
   gap: 0.25em;
@@ -59,7 +67,11 @@
 
 .key-selection {
   max-width: 5em;
-  color: white
+  color: white;
+  background-color: transparent;
+  border: solid white 1px;
+  border-radius: 4px;
+  min-width: 5em;
 }
 
 .react-dropdown-select-item {

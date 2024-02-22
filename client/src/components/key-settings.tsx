@@ -1,15 +1,23 @@
-import { FormEvent, FormEventHandler, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import Dropdown, { DropdownOption } from './dropdown'
-import ChordsForKey, { Note, Accidental, Scale } from './chords-for-key'
+import { Accidental, Flat, NaturalNote, Scale, Sharp } from '../Note'
+
+const FLAT_SYMBOL = '♭'
+const SHARP_SYMBOL = '♯'
 
 const keyOptions = [
-  { value: Note.A, key: Note.A },
-  { value: Note.B, key: Note.B },
-  { value: Note.C, key: Note.C },
-  { value: Note.D, key: Note.D },
-  { value: Note.E, key: Note.E },
-  { value: Note.F, key: Note.F },
-  { value: Note.G, key: Note.G }
+  { key: NaturalNote.C, value: NaturalNote.C },
+  { key: Flat.Dflat, value: NaturalNote.D + FLAT_SYMBOL },
+  { key: NaturalNote.D, value: NaturalNote.D },
+  { key: Flat.Eflat, value: NaturalNote.E + FLAT_SYMBOL },
+  { key: NaturalNote.E, value: NaturalNote.E },
+  { key: NaturalNote.F, value: NaturalNote.F },
+  { key: Sharp.Fsharp, value: NaturalNote.F + SHARP_SYMBOL },
+  { key: NaturalNote.G, value: NaturalNote.G },
+  { key: Flat.Aflat, value: NaturalNote.A + FLAT_SYMBOL },
+  { key: NaturalNote.A, value: NaturalNote.A },
+  { key: Flat.Bflat, value: NaturalNote.B + FLAT_SYMBOL },
+  { key: NaturalNote.B, value: NaturalNote.B }
 ]
 
 const accidentalOptions = [
@@ -41,7 +49,7 @@ const KeySettings = ({ handleSubmit }: KeySettingsProps) => {
         <label>Key:</label>
         <div className='key-input'>
           <Dropdown label={'baseKey'} options={keyOptions} />
-          <Dropdown label={'accidental'} options={accidentalOptions} />
+          {/* <Dropdown label={'accidental'} options={accidentalOptions} /> */}
           <Dropdown label={'scale'} options={scaleOptions} />
         </div>
         <button type='submit'>Update</button>

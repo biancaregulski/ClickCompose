@@ -1,38 +1,33 @@
 import KeySettings from './key-settings'
-import ChordsForKey, { Accidental, Note, Scale } from './chords-for-key'
+import ChordsForKey from './chords-for-key'
+import { GenericNote, Scale } from '../Note'
 import { useState } from 'react'
 
 interface KeyFormData {
-  baseKey: Note
-  accidental: Accidental
+  keyNote: GenericNote
   scale: Scale
   progression: string
 }
 
 const Sidebar = () => {
-  const [baseKey, setBaseKey] = useState<Note>()
-  const [accidental, setAccidental] = useState<Accidental>()
+  const [keyNote, setKeyNote] = useState<GenericNote>()
   const [scale, setScale] = useState<Scale>()
 
   const handleKeySettingsSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as typeof e.target & {
-      baseKey: { value: Note }
-      accidental: { value: Accidental }
+      baseKey: { value: GenericNote }
       scale: { value: Scale }
     }
 
-    setBaseKey(target.baseKey.value)
-    setAccidental(target.accidental.value)
+    setKeyNote(target.baseKey.value)
     setScale(target.scale.value)
   }
 
   return (
     <div className='sidebar'>
       <KeySettings handleSubmit={handleKeySettingsSubmit} />
-      {baseKey ? (
-        <ChordsForKey baseKey={baseKey} accidental={accidental} scale={scale} />
-      ) : null}
+      {keyNote ? <ChordsForKey genericNote={keyNote} scale={scale} /> : null}
     </div>
   )
 }

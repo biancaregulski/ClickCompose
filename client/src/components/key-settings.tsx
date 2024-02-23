@@ -30,7 +30,6 @@ const scaleOptions = [
   { value: Scale.major, key: 'maj' },
   { value: Scale.minor, key: 'min' }
 ]
-const standardProgressions = ['I - V - VI - IV']
 
 interface DropdownProps {
   options: DropdownOption[]
@@ -49,7 +48,6 @@ const KeySettings = ({ handleSubmit }: KeySettingsProps) => {
         <label>Key:</label>
         <div className='key-input'>
           <Dropdown label={'baseKey'} options={keyOptions} />
-          {/* <Dropdown label={'accidental'} options={accidentalOptions} /> */}
           <Dropdown label={'scale'} options={scaleOptions} />
         </div>
         <button type='submit'>Update</button>

@@ -16,7 +16,10 @@ function App () {
     <div className='App'>
       <div className='interface'>
         <Workspace workspaceChords={workspaceChords} />
-        <Sidebar addChordToWorkspace={addChordToWorkspace} />
+        <Sidebar
+          workspaceChords={workspaceChords}
+          addChordToWorkspace={addChordToWorkspace}
+        />
       </div>
       <div className='piano-container'>
         <PianoTool />

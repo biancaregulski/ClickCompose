@@ -3,6 +3,7 @@ import ChordsForKey from './chords-for-key'
 import { GenericNote, Scale } from '../Note'
 import { useState } from 'react'
 import { Chord } from '../Chord'
+import SuggestedProgressions from './suggested-progressions'
 
 interface KeyFormData {
   keyNote: GenericNote
@@ -12,9 +13,10 @@ interface KeyFormData {
 
 interface SidebarProps {
   addChordToWorkspace: (newChord: Chord) => void
+  workspaceChords: Array<Chord>
 }
 
-const Sidebar = ({ addChordToWorkspace }: SidebarProps) => {
+const Sidebar = ({ addChordToWorkspace, workspaceChords }: SidebarProps) => {
   const [keyNote, setKeyNote] = useState<GenericNote>()
   const [scale, setScale] = useState<Scale>()
 
@@ -32,7 +34,7 @@ const Sidebar = ({ addChordToWorkspace }: SidebarProps) => {
   return (
     <div className='sidebar'>
       <KeySettings handleSubmit={handleKeySettingsSubmit} />
-      {keyNote ? (
+      {keyNote && scale ? (
         <ChordsForKey
           addChordToWorkspace={addChordToWorkspace}
           genericNote={keyNote}

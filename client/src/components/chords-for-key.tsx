@@ -4,11 +4,13 @@ import { getAvaliableChords } from '../chord-helper'
 import { getOrderedNotesforKey } from '../note-helper'
 
 interface ChordsForKeyProps {
+  addChordToWorkspace: (newChord: Chord) => void
   genericNote: GenericNote
   scale?: Scale
 }
 
 const ChordsForKey = ({
+  addChordToWorkspace,
   genericNote,
   scale = Scale.major
 }: ChordsForKeyProps) => {
@@ -18,7 +20,11 @@ const ChordsForKey = ({
     <div className='chord-group'>
       {availableChords
         ? availableChords.map(function (chord: Chord, i) {
-            return <button key={i}>{chord.getChordName()}</button>
+            return (
+              <button onClick={() => addChordToWorkspace(chord)} key={i}>
+                {chord.getChordName()}
+              </button>
+            )
           })
         : null}
     </div>

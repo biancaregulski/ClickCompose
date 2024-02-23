@@ -2,7 +2,9 @@
 import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano'
 import 'react-piano/dist/styles.css'
 
-const PianoTool = () => {
+interface PianoToolProps {}
+
+const PianoTool = ({}: PianoToolProps) => {
   const firstNote = MidiNumbers.fromNote('c3')
   const lastNote = MidiNumbers.fromNote('f5')
 

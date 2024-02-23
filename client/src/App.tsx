@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 import Workspace from './components/workspace'
 import Sidebar from './components/sidebar'
 import PianoTool from './components/piano-tool'
+import { Chord } from './Chord'
 
 function App () {
+  const [workspaceChords, setWorkspaceChords] = useState<Array<Chord>>([])
+  function addChordToWorkspace (newChord: Chord) {
+    setWorkspaceChords(currentChords => [...currentChords, newChord])
+  }
+
   return (
     <div className='App'>
       <div className='interface'>
-        <Workspace />
-        <Sidebar />
+        <Workspace workspaceChords={workspaceChords} />
+        <Sidebar addChordToWorkspace={addChordToWorkspace} />
       </div>
       <div className='piano-container'>
         <PianoTool />
